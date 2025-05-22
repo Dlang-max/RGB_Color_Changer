@@ -73,7 +73,6 @@ int main(int argc, char *argv[]) {
 
 	
 	libusb_release_interface(handle, 1);
-	// libusb_attach_kernel_driver(handle, 1);
 	libusb_close(handle);
 	libusb_free_device_list(devices, 1);
 	libusb_exit(NULL);
