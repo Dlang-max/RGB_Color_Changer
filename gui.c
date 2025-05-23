@@ -1,17 +1,21 @@
 #include "gui.h"
 
-static void print_color(GtkWidget *widget, gpointer data) {
+u_int8_t *print_color(GtkWidget *widget, gpointer data) {
 	GdkRGBA *color;
 	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(widget), color);
-	uint8_t red = (uint8_t)(0xFF * color->red);
-	uint8_t green = (uint8_t)(0xFF * color->green);
-	uint8_t blue = (uint8_t)(0xFF * color->blue);
+	
+	u_int8_t red = (u_int8_t)(0xFF * color->red);
+	u_int8_t green = (u_int8_t)(0xFF * color->green);
+	u_int8_t blue = (u_int8_t)(0xFF * color->blue);
+	u_int8_t colors[3] = {red, green, blue};
 
-	g_print("R: 0x%02x G: 0x%02x B: 0x%02x\n", red, green, blue);
-	g_print("R: %d G: %d B: %d\n", red, green, blue);
+	return colors;
 }
 
-static void activate(GtkApplication *app, gpointer user_data) {
+
+
+
+void activate(GtkApplication *app, gpointer user_data) {
 	GtkWidget *window;
 	window = gtk_application_window_new (app);
   	gtk_window_set_title(GTK_WINDOW (window), "Color Chooser");
@@ -25,12 +29,11 @@ static void activate(GtkApplication *app, gpointer user_data) {
 	gtk_window_present(GTK_WINDOW(window));
 }
 
-int main(int argc, char *argv[]) {
+
+GtkApplication *initialize_gtk() {
 	GtkApplication *app;
 	app = gtk_application_new("gtk.color.chooser", G_APPLICATION_DEFAULT_FLAGS);
 	g_signal_connect(app, "activate", G_CALLBACK (activate), NULL);
-	int status = g_application_run(G_APPLICATION (app), argc, argv);
-	g_object_unref(app);
 
-	return status;
+	return app;
 }

@@ -4,6 +4,8 @@
 #include <gtk/gtk.h>
 #include <stdint.h>
 
-static void print_color(GtkWidget *widget, gpointer data);
-static void activate(GtkApplication *app, gpointer user_data);
-int main(int argc, char *argv[]);
+
+u_int8_t *print_color(GtkWidget *widget, gpointer data);
+void activate(GtkApplication *app, gpointer user_data);
+
+GtkApplication *initialize_gtk();
