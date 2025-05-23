@@ -1,6 +1,3 @@
-#include "gdk/gdk.h"
-#include "gio/gio.h"
-#include "glib-object.h"
 #include <gtk/gtk.h>
 #include <stdint.h>
 
